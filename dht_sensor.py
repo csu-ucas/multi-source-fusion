@@ -25,7 +25,7 @@ class DHTSensor(object):
 		while GPIO.input(self.channel) == GPIO.HIGH:
 			continue
 		GPIO.cleanup()
-		time.sleep(2)
+		time.sleep(8)
 		print("provison finished")
 
 	def get_number(self):
@@ -55,5 +55,5 @@ if __name__ == "__main__":
 			s.sendall(string.encode())
 			# data = s.recv(1024)
 			s.close()
-		time.sleep(9)
+		time.sleep(8)
 	#print(sensor.get_number())

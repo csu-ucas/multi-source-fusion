@@ -9,6 +9,7 @@ skt.listen()
 tmprt = -65536
 humid = -65536
 firdt = False 
+critical_temp = 33
 
 while True:
     conn = skt.accept()
@@ -18,22 +19,20 @@ while True:
     else:
         msg_tup = msg[1:len(msg)-1].split(', ')
         
-        print(msg_tup)
         if msg_tup[0] == "'DTH'":
-            # print(msg[0])
-            # print(msg[1])
-            # print(msg[2])
-            # print(msg[3])
+            
             tmprt = float(msg_tup[2])
             humid = float(msg_tup[3])
         elif msg_tup[0] == "'FireSuspect'":
             
             firdt = (msg_tup[1] == 'True')
-            print(firdt)
-        if firdt and (tmprt >= 27):
+
+        if firdt and (tmprt >= critical_temp):
             print("Fire Detected: %s"%datetime.datetime.now())
-        elif (not firdt) and (tmprt >=27):
+        elif (not firdt) and (tmprt >=critical_temp):
             print("Suspicious temperature augmentation: %s"%datetime.datetime.now())
+        elif (firdt) and (tmprt < critical_temp):
+            print("Suspicious fire texture: %s"%datetime.datetime.now())
         else:
             print("No Fire Detected: %s"%datetime.datetime.now())
             
