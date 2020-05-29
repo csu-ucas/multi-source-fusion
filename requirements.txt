@@ -1,4 +1,4 @@
-dht11 >= 0.1
+# dht11 >= 0.1
 opencv-contrib-python
 tensorflow<2
 tflearn
